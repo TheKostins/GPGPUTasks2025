@@ -97,7 +97,7 @@ void run(int argc, char** argv)
     };
 
     // TODO 020 Это добровольное задание за супер-пупер-баллы престижа сверх нормы
-    bool I_Want_Super_Puper_Prestige_Points = false;
+    bool I_Want_Super_Puper_Prestige_Points = true;
     if (I_Want_Super_Puper_Prestige_Points) {
         if (context.type() == gpu::Context::TypeCUDA) {
             algorithm_names.push_back("03 using WMMA (Tensor Cores) [+Prestige Points]");
@@ -156,7 +156,7 @@ void run(int argc, char** argv)
                     } else if (algorithm == "02 using local memory") {
                         vk_matrix04MultiplyViaLocalMemory.exec(params, gpu::WorkSize(GROUP_SIZE_X, GROUP_SIZE_Y, w, h), matrix_a_gpu, matrix_b_gpu, matrix_c_gpu);
                     } else if (algorithm == "03 using cooperative matrix [+Prestige Points]") {
-                        vk_matrix05MultiplyCooperativeMatrix.exec(params, gpu::WorkSize(VK_SUBGROUP_SIZE, 1, w, h), matrix_a_gpu, matrix_b_gpu, matrix_c_gpu);
+                        vk_matrix05MultiplyCooperativeMatrix.exec(params, gpu::WorkSize(GROUP_SIZE, 1, w, h), matrix_a_gpu, matrix_b_gpu, matrix_c_gpu);
                     } else {
                         rassert(false, 7652345234321, algorithm, algorithm_index);
                     }
